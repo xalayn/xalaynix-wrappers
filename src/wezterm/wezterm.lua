@@ -23,6 +23,7 @@ config.initial_rows = 28
 config.font_size = 16
 config.color_scheme = nix.color_scheme
 config.window_background_opacity = nix.window_background_opacity
+config.enable_tab_bar = false
 
 -- Finally, return the configuration to wezterm:
 return config
