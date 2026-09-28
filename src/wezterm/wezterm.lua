@@ -1,6 +1,9 @@
 -- Pull in the wezterm API
 local wezterm = require 'wezterm'
 
+-- Pull in nix-provided config
+local nix = require 'nix-info'
+
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
@@ -18,7 +21,7 @@ config.initial_rows = 28
 
 -- or, changing the font size and color scheme.
 config.font_size = 16
-config.color_scheme = 'AdventureTime'
+config.color_scheme = nix.color_scheme
 
 -- Finally, return the configuration to wezterm:
 return config

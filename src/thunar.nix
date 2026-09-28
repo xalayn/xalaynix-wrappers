@@ -3,38 +3,16 @@ let
   zshPkg = system: inputs.self.packages.${system}.zsh;
 in
 {
-  flake.wrappers.wezterm = 
+  flake.wrappers.thunar = 
   { pkgs, lib, wlib, config, ... }: {
-    imports = [ wlib.wrapperModules.wezterm ];
+    imports = [ wlib.modules.default ];
 
-    options = {
-      colorScheme = lib.mkOption {
-        type = lib.types.str;
-        default = "AdventureTime";
-        description = ''
-          Defines the theme used by Wezterm.
-          Specifically, it is what config.color_scheme will be
-          set to in wezterm.lua.
-        '';
-      };
-    };
 
     config = {
 
-      package = pkgs.wezterm;
+      package = pkgs.xfce.thunar;
 
-      env = {
-        TESTVAR = "Hello :D";
-        WRAPPED_ZSH = "${zshPkg pkgs.system}/bin/zsh";
-      };
-
-      "wezterm.lua".path = "${./wezterm.lua}";
-
-      luaInfo = {
-        color_scheme = config.colorScheme;
-      };
-
-      constructFiles.wezterm-desktop = {
+      constructFiles.thunar-desktop = {
         relPath = "share/applications/org.wezfurlong.wezterm.desktop";
         content = ''
           [Desktop Entry]
@@ -48,6 +26,14 @@ in
           Type=Application
           Categories=System;TerminalEmulator;Utility;
           Terminal=false
+        '';
+      };
+
+      buildCommand.patchDesktopFile = {
+        after = [ "symlinkScript" "patchSelfReferences" ];
+        data = ''
+          # Replace all bare 'thunar' with absolute path to wrapped binary
+          sed -i 's|^Exec=thunar|Exec=${config.package}/bin/thunar|g' "${placeholder "out"}/share/applications/thunar.desktop"
         '';
       };
 

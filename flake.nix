@@ -20,6 +20,13 @@
       ]
     );
 
+  nixConfig = {
+    extra-substituters = [ "https://noctalia.cachix.org" ];
+    extra-trusted-public-keys = [
+      "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+    ];
+  };
+
   inputs = {
     dgop = {
       inputs.nixpkgs.follows = "nixpkgs";
@@ -35,12 +42,13 @@
       url = "github:hercules-ci/flake-parts";
     };
     import-tree.url = "github:vic/import-tree";
-    niri = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:niri-wm/niri?ref=wip/branch";
-    };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-lib.follows = "nixpkgs";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    noctalia = {
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      url = "github:noctalia-dev/noctalia-shell";
+    };
     systems.url = "github:nix-systems/default";
     wrapper-modules = {
       inputs.nixpkgs.follows = "nixpkgs";
