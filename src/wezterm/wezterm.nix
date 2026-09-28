@@ -32,6 +32,7 @@ in
 
       luaInfo = {
         color_scheme = config.colorScheme;
+        window_background_opacity = 0.75;
       };
 
       constructFiles.wezterm-desktop = {
