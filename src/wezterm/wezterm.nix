@@ -10,7 +10,7 @@ in
     options = {
       colorScheme = lib.mkOption {
         type = lib.types.str;
-        default = "AdventureTime";
+        default = "Seafoam Pastel (Gogh)";
         description = ''
           Defines the theme used by Wezterm.
           Specifically, it is what config.color_scheme will be
@@ -20,7 +20,7 @@ in
 
       window_background_opacity = lib.mkOption {
         type = lib.types.float;
-        default = 0.5;
+        default = 0.65;
         description = ''
           Defines the opacity of the Wezterm window background.
           Specifically, it is what config.window_background_opacity will be
