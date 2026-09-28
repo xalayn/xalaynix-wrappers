@@ -17,6 +17,16 @@ in
           set to in wezterm.lua.
         '';
       };
+
+      window_background_opacity = lib.mkOption {
+        type = lib.types.float;
+        default = 0.5;
+        description = ''
+          Defines the opacity of the Wezterm window background.
+          Specifically, it is what config.window_background_opacity will be
+          set to in wezterm.lua.
+        '';
+      };
     };
 
     config = {
@@ -32,7 +42,7 @@ in
 
       luaInfo = {
         color_scheme = config.colorScheme;
-        window_background_opacity = 0.75;
+        window_background_opacity = config.window_background_opacity;
       };
 
       constructFiles.wezterm-desktop = {
